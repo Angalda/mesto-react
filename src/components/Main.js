@@ -11,37 +11,30 @@ function Main({ onEditAvatar, onEditPofile, onNewPlace, onView }) {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getProfile()
-      .then((res) => {
+    const initialArray = [api.getProfile(), api.getCardInfo()]
 
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch((err) => console.log(err))
-  });
 
-  React.useEffect(() => {
-    api.getCardInfo()
-      .then((res) => {
+    Promise.all(initialArray)
+      .then(
+        ([userData, cardList]) => {
+          setUserName(userData.name);
+          setUserDescription(userData.about);
+          setUserAvatar(userData.avatar);
 
-        const newCard = res.map((data) => {
-          return {
-            name: data.name,
-            link: data.link,
-            likes: data.likes,
-            _id: data._id
-          }
+          const newCard = cardList.map((data) => {
+            return {
+              name: data.name,
+              link: data.link,
+              likes: data.likes,
+              _id: data._id
+            }
 
+          })
+          setCards(newCard);
         })
 
-        setCards(newCard);
-
-      })
-      .catch((err) => console.log(err));
-  });
-
-
+      .catch((err) => console.log(err))
+  }, []);
 
   return (
     <div className="Main">

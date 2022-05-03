@@ -62,7 +62,7 @@ function App() {
                     <span className="pop-up__span-error pop-up__span-error_visible profile-description-error"
                         id="profile-description-error"></span>
                 </PopupWithForm>
-                <PopupWithForm isOpen={isAddPlace} name={'cards'} closePopup={handleClosePopup} title={'Новое место'} textButton={'Сохранить'}>
+                <PopupWithForm isOpen={isAddPlace} name={'cards'} closePopup={handleClosePopup} title={'Новое место'} textButton={'Создать'}>
                     <input type="text" className="pop-up__input pop-up__input_value_card-title" id="card-title"
                         name="card-title" placeholder="Название" required minLength="2" maxLength="30"></input>
 
