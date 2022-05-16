@@ -1,20 +1,70 @@
 import React, { useState } from 'react';
 
+
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
+import { api } from "../utils/Api";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
 
 
 function App() {
+
+
 
     const [isEditProfile, setIsEditProfile] = useState(false);
     const [isAddPlace, setIsAddPlace] = useState(false);
     const [isEditAvatar, setIsEditAvatar] = useState(false);
     const [isImgView, setIsImgView] = useState(false);
-
     const [selectedCard, setSelectedCard] = useState({});
+    const [currentUser, setCurrentUser] = useState({});
+    const [cards, setCards] = useState([]);
+
+    React.useEffect(() => {
+    
+    
+        Promise.all( [api.getProfile(), api.getCardInfo()])
+          .then(
+            ([userData, cardList]) => {
+              setCurrentUser(userData); 
+              
+              const newCard = cardList.map((data) => {
+                return {
+                  ...data,
+                  isOpen: false,
+                }
+    
+              })
+              setCards(newCard);
+            })
+
+          .catch((err) => console.log(err))
+      }, []);
+    
+    function handleCardLike (card) {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+    
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        api.changeStatusLike(card._id, !isLiked).then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    });
+    }
+
+    function handleCardDelete (card) {
+        api.deleteCard(card._id)
+        .then((res)=> {
+            setCards((state)=>
+               state.filter((c)=>c._id!== card._id)
+            )
+
+        })
+        .catch((err) => console.log(err));
+
+    }
 
     function handleEditProfileClick() {
         setIsEditProfile(true);
@@ -41,11 +91,14 @@ function App() {
     }
 
     return (
+    <CurrentUserContext.Provider value={currentUser}>
         <div className="App">
             <>
                 <div className="page">
                     <Header />
-                    <Main onEditAvatar={handleEditAvatarClick} onEditPofile={handleEditProfileClick} onNewPlace={handleAddPlaceClick} onView={handleImgClick} />
+    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState([]);
+                    <Main onEditAvatar={handleEditAvatarClick} onEditPofile={handleEditProfileClick} onNewPlace={handleAddPlaceClick} onView={handleImgClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
                     <Footer />
                 </div>
@@ -100,6 +153,7 @@ function App() {
 
             </>
         </div>
+    </CurrentUserContext.Provider>
     );
 }
 

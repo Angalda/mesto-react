@@ -94,6 +94,14 @@ class Api {
       .then((res) => this._checkResponse(res))
   }
 
+  changeStatusLike(id, isLiked) {
+    if (isLiked) {
+      return this.addLike(id);
+    } else {
+      return this.removeLike(id);
+    }
+  }
+
 
   changeAvatar(data) {
 
