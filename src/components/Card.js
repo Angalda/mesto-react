@@ -32,6 +32,8 @@ function Card(props) {
         props.onCardDelete(props.card)
     }
 
+    
+
     return (
         <li className="photo-card" id={props.card._id} key={props.card._id} >
 

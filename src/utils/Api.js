@@ -32,7 +32,7 @@ class Api {
   }
 
   //Редактирование профиля на сервере!!!
-  postUserInfo(name, about) {
+  postUserInfo({name, about}) {
 
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
@@ -47,7 +47,7 @@ class Api {
   }
 
   //Добавление данных новой карточки на сервер !!!
-  postCardInfo(name, link) {
+  postCardInfo({name, link}) {
 
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
@@ -105,13 +105,11 @@ class Api {
 
   changeAvatar(data) {
 
-    console.log(data);
-
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.link
+        avatar: data.avatar
       })
     })
       .then((res) => this._checkResponse(res))
