@@ -1,4 +1,3 @@
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -9,7 +8,7 @@ class Api {
     if (!res.ok) {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
-    return res.json()
+    return res.json();
   }
 
   //Получаем с сервера информацию о пользователе
@@ -17,7 +16,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-      .then((res) => this._checkResponse(res))
+      .then(this._checkResponse)
   }
 
 
@@ -26,13 +25,11 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-
-      .then((res) => this._checkResponse(res))
-
+      .then(this._checkResponse)
   }
 
   //Редактирование профиля на сервере!!!
-  postUserInfo({name, about}) {
+  postUserInfo({ name, about }) {
 
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
@@ -42,12 +39,11 @@ class Api {
         about: about
       })
     })
-
-      .then((res) => this._checkResponse(res))
+      .then(this._checkResponse)
   }
 
   //Добавление данных новой карточки на сервер !!!
-  postCardInfo({name, link}) {
+  postCardInfo({ name, link }) {
 
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
@@ -57,20 +53,16 @@ class Api {
         link: link
       })
     })
-
-      .then((res) => this._checkResponse(res))
+      .then(this._checkResponse)
   }
 
   //Удаление карточки с сервера!!!
   deleteCard(idCard) {
-    //console.log({idCard});
-
     return fetch(`${this._baseUrl}/cards/${idCard}`, {
       method: 'DELETE',
       headers: this._headers
     })
-      .then((res) => this._checkResponse(res))
-
+      .then(this._checkResponse)
   }
 
   //Постановка и снятие лайка на сервере!!!
@@ -80,8 +72,7 @@ class Api {
       method: 'PUT',
       headers: this._headers
     })
-      .then((res) => this._checkResponse(res))
-
+      .then(this._checkResponse)
   }
 
   removeLike(idCard, likes) {
@@ -90,8 +81,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers
     })
-
-      .then((res) => this._checkResponse(res))
+      .then(this._checkResponse)
   }
 
   changeStatusLike(id, isLiked) {
@@ -112,7 +102,7 @@ class Api {
         avatar: data.avatar
       })
     })
-      .then((res) => this._checkResponse(res))
+      .then(this._checkResponse)
   }
 
 }
