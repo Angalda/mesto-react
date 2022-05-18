@@ -36,17 +36,39 @@ function AddPlacePopup(props) {
             title={'Новое место'}
             textButton='Создать'
         >
-            <input value={cardName} onChange={handleCardName} type="text" className="pop-up__input pop-up__input_value_card-title" id="card-title"
-                name="card-title" placeholder="Название" required minLength="2" maxLength="30"></input>
+            <input
+                value={cardName}
+                onChange={handleCardName}
+                type="text"
+                className="pop-up__input pop-up__input_value_card-title"
+                id="card-title"
+                name="card-title"
+                placeholder="Название"
+                required
+                minLength="2"
+                maxLength="30">
+            </input>
 
-            <span className="pop-up__span-error pop-up__span-error_visible card-title-error"
-                id="card-title-error"></span>
+            <span
+                className="pop-up__span-error pop-up__span-error_visible card-title-error"
+                id="card-title-error">
+            </span>
 
-            <input value={cardLink} onChange={handleCardLink} type="url" className="pop-up__input pop-up__input_value_card-link" id="card-link"
-                name="card-link" placeholder="Ссылка на картинку" required></input>
+            <input
+                value={cardLink}
+                onChange={handleCardLink}
+                type="url"
+                className="pop-up__input pop-up__input_value_card-link"
+                id="card-link"
+                name="card-link"
+                placeholder="Ссылка на картинку"
+                required>
+            </input>
 
-            <span className="pop-up__span-error pop-up__span-error_visible card-link-error"
-                id="card-link-error"></span>
+            <span
+                className="pop-up__span-error pop-up__span-error_visible card-link-error"
+                id="card-link-error">
+            </span>
         </PopupWithForm>
     )
 }

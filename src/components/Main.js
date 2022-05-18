@@ -3,7 +3,15 @@ import Card from "./Card";
 import editImg from "../images/edit.svg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Main({ onEditAvatar, onEditPofile, onNewPlace, onView, cards, onCardLike, onCardDelete }) {
+function Main({
+  onEditAvatar,
+  onEditPofile,
+  onNewPlace,
+  onView,
+  cards,
+  onCardLike,
+  onCardDelete
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -31,7 +39,15 @@ function Main({ onEditAvatar, onEditPofile, onNewPlace, onView, cards, onCardLik
       {/*___________________photo-cards__________________________*/}
       <section className="photo-cards">
         <ul className="photo-cards__list">
-          {cards.map((card) => (<Card card={card} key={card._id} onView={onView} onCardLike={onCardLike} onCardDelete={onCardDelete} />))}
+          {cards.map((card) => (
+            <Card
+              card={card}
+              key={card._id}
+              onView={onView}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />)
+          )}
         </ul>
       </section>
     </main>

@@ -4,6 +4,7 @@ class Api {
     this._headers = headers;
 
   }
+  
   _checkResponse(res) {
     if (!res.ok) {
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -91,7 +92,6 @@ class Api {
       return this.removeLike(id);
     }
   }
-
 
   changeAvatar(data) {
 

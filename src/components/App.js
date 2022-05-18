@@ -5,7 +5,6 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
-//import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
@@ -23,15 +22,12 @@ function App() {
     const [cards, setCards] = useState([]);
 
     React.useEffect(() => {
-
-
         Promise.all([api.getProfile(), api.getCardInfo()])
             .then(
                 ([userData, cardList]) => {
                     setCurrentUser(userData);
                     setCards(cardList);
                 })
-
             .catch((err) => console.log(err))
     }, []);
 
