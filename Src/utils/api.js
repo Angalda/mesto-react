@@ -20,7 +20,6 @@ class Api {
       .then(this._checkResponse)
   }
 
-
   //Загрузка данных для карточек с сервера
   getCardInfo() {
     return fetch(`${this._baseUrl}/cards`, {
@@ -31,7 +30,6 @@ class Api {
 
   //Редактирование профиля на сервере!!!
   postUserInfo({ name, about }) {
-
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -45,7 +43,6 @@ class Api {
 
   //Добавление данных новой карточки на сервер !!!
   postCardInfo({ name, link }) {
-
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -67,7 +64,6 @@ class Api {
   }
 
   //Постановка и снятие лайка на сервере!!!
-
   addLike(idCard, likes) {
     return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
       method: 'PUT',
@@ -77,7 +73,6 @@ class Api {
   }
 
   removeLike(idCard, likes) {
-
     return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
       method: 'DELETE',
       headers: this._headers
@@ -94,7 +89,6 @@ class Api {
   }
 
   changeAvatar(data) {
-
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
